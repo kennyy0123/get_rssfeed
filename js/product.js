@@ -6,7 +6,6 @@ function call_hackernews(page_number){
         success: function(response){
             var channel_response = $(response).find("item")
             var title, url;
-            $('.HackerNews').append('======== Hacker News ========<br/>');
             $(channel_response).each(function(index, value) {
                 title = $(value).children('title').text();
                 url = $(value).children('link').text();
@@ -24,7 +23,6 @@ function call_producthunt() {
         success: function(response){
             var title, url;
             var product_response = $(response).find('entry');
-            $('.ProductHunt').append('======== Product Hunt ========<br/>');
             $(product_response).each(function(index,value){
                 title = $(value).children('title').text();
                 url = $(value).find('link').attr('href');
