@@ -7,16 +7,13 @@
 <body>
     <div class="listing-rss">
     </div>
-    <button id="next"> Next </button>
 </body>
 </html>
 
 <script src="./js/jquery-3.1.1.js"></script>
 <script type="text/javascript">
 
-
-
-function call_nextpage(page_number){
+function call_hackernews(page_number){
     $.ajax({
         'type': 'get',
         'dataType': 'xml',
@@ -24,17 +21,35 @@ function call_nextpage(page_number){
         success: function(response){
             var channel_response = $(response).find("item")
             var title, url;
-
-            console.log(response);
-
+            $('.listing-rss').append('======== Hacker News ========<br/>');
             $(channel_response).each(function(index, value) {
                 title = $(value).children('title').text();
                 url = $(value).children('link').text();
-                $('.listing-rss').append('<a href="'+ url +'"> "' + title + '" </a><br/>');
+                $('.listing-rss').append('<a href="'+ url +'"> [HN]: ' + title + ' </a><br/>');
             });
         }
     });
 }
 
-call_nextpage(2);
+function call_producthunt() {
+    $.ajax({
+        'type': 'get',
+        'dataType': 'xml',
+        'url': 'https://www.producthunt.com/feed',
+        success: function(response){
+            var title, url;
+            var product_response = $(response).find('entry');
+            $('.listing-rss').append('======== Product Hunt ========<br/>');
+            $(product_response).each(function(index,value){
+                title = $(value).children('title').text();
+                url = $(value).find('link').attr('href');
+                $('.listing-rss').append('<a href="'+ url +'"> [PH]: ' + title + ' </a><br/>');
+            });
+            console.log(product_response);
+        }
+    });
+}
+
+call_hackernews(1);
+call_producthunt();
 </script>
