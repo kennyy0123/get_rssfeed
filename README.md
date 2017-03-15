@@ -1,4 +1,4 @@
-# GET RSS FEED (PRODUCT HUNT / HackerNews)
+# RSS FEED (HackerNews / ProductHunt)
 
 Get rss from best IT news website (ProductHunt, HackerNews)
 
